@@ -1,0 +1,232 @@
+1) Create a user with only database create access rights.
+CREATE USER usr_createdb WITH CREATEDB;
+select * from pg_user;
+
+2) Create a user with superuser access rights.
+CREATE USER usr_super WITH SUPERUSER;
+
+3) Create a user with database creation, superuser and role creation access rights.
+CREATE USER usr_a WITH CREATEDB SUPERUSER CREATEROLE;
+
+4) Drop any one of the users which you have created.
+DROP USER IF EXISTS usr_createdb
+
+5) Alter any one user’s password with your desired password.
+ALTER USER usr_super WITH PASSWORD '0711';
+
+6) Create a database.
+CREATE DATABASE pract;
+
+7) Delete a database which is created.
+DROP DATABASE pract;
+
+8) Create a database and add a table employee with specified fields.
+CREATE DATABASE pract;
+\c pract
+CREATE TABLE employee (
+  employee_id serial PRIMARY KEY,
+  name text NOT NULL,
+  email varchar(100) NOT NULL,
+  phone_no varchar(10) NOT NULL,
+  designation varchar(50) NOT NULL,
+  department varchar(30) NOT NULL,
+  birth_date date NOT NULL,
+  join_date date NOT NULL
+);
+
+9) Modify the table and add two fields as following. Level , Qualification
+ALTER TABLE employee ADD COLUMN level varchar(10) NOT NULL;
+ALTER TABLE employee ADD COLUMN qualification varchar(25) NOT NULL;
+\d employee
+
+10) Modify a table and Delete a column from the table.
+ALTER TABLE employee DROP COLUMN qualification;
+
+11) Insert 10 records with unique employee ids in the employee table.
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Binal Mori', 'binalmori@gmail.com', '9876543210', 'Manager', 'Marketing', '2000-01-01', '2020-01-01','Level 2');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Riddhi Chauhan', 'rc@gmail.com', '9876543210', 'Sales Person', 'Sales', '2001-01-01', '2019-01-01','Level 1');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Sanket', 's@gmail.com', '9876543220', 'Manager', 'Sales', '2000-02-01', '2021-01-01','Level 2');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Dhruvil', 'd@gmail.com', '9886543220', 'CEO', 'Management', '1998-01-01', '2018-01-01','Level 4');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Darshan', 'd1@gmail.com', '9886543220', 'CTO', 'Management', '1998-01-01', '2018-01-01','Level 4');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Smit', 'd@gmail.com', '9886543220', 'CMO', 'Marketing', '1998-01-01', '2018-01-01','Level 4');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Kajal', 'k@gmail.com', '9886543220', 'Senior Manager', 'Marketing', '1998-01-01', '2018-01-01','Level 3');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Divyesh', 'd2@gmail.com', '9886543220', 'Senior Manager', 'Sales', '1998-01-01', '2018-01-01','Level 3');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Ami', 'a@gmail.com', '9886543220', 'Senior Manager', 'Manufacturing', '1998-01-01', '2018-01-01','Level 3');
+INSERT INTO employee (name, email, phone_no, designation, department, birth_date, join_date,level)
+VALUES ('Nitin', 'n@gmail.com', '9886543220', 'Manager', 'Manufacturing', '1998-01-01', '2018-01-01','Level 2');
+
+12) Update all the records together. Update only one field.
+UPDATE employee SET level = 'New Level' WHERE 1 = 1;
+
+13) Delete a single record from a table.
+DELETE FROM employee WHERE employee_id = 10;
+
+14) Delete all the records from a table using Delete.
+DELETE FROM employee WHERE 1 = 1;
+
+15) Delete all the records from a table without using Delete.
+TRUNCATE TABLE employee;
+
+16) Write a select query with multiple conditions using ‘AND’ and ‘OR’.
+SELECT * FROM employee WHERE department = 'Marketing' AND (designation = 'Manager' OR designation = 'Senior Manager');
+
+17) Create a table employee where it contains id, name, city. Find the city which ends with ‘abad’. Enter 30 records scattered in different cities like Hyderabad, Ahmedabad, Mumbai, Delhi, Chennai, Kochin, Kolkatta, Pune, Bangalore.
+CREATE TABLE emp (
+  id integer PRIMARY KEY,
+  name varchar(15) NOT NULL,
+  city varchar(20) NOT NULL
+);
+INSERT INTO emp (id, name, city) VALUES (1, 'Binal Mori', 'Hyderabad');
+INSERT INTO emp (id, name, city) VALUES (2, 'Riddhi', 'Ahmedabad');
+INSERT INTO emp (id, name, city) VALUES (3, 'Bob Smith', 'Mumbai');
+INSERT INTO emp (id, name, city) VALUES (4, 'Alice Smith', 'Delhi');
+INSERT INTO emp (id, name, city) VALUES (5, 'Tom Smith', 'Chennai');
+INSERT INTO emp (id, name, city) VALUES (6, 'Sue Smith', 'Kochin');
+INSERT INTO emp (id, name, city) VALUES (7, 'Bill Smith', 'Kolkata');
+INSERT INTO emp (id, name, city) VALUES (8, 'Mary Smith', 'Pune');
+INSERT INTO emp (id, name, city) VALUES (9, 'Mike Smith', 'Bangalore');
+INSERT INTO emp (id, name, city) VALUES (10, 'Jane Doe', 'Hyderabad');
+INSERT INTO emp (id, name, city) VALUES (11, 'John Doe', 'Ahmedabad');
+INSERT INTO emp (id, name, city) VALUES (12, 'Bob Doe', 'Mumbai');
+INSERT INTO emp (id, name, city) VALUES (13, 'Alice Doe', 'Delhi');
+INSERT INTO emp (id, name, city) VALUES (14, 'Tom Doe', 'Chennai');
+INSERT INTO emp (id, name, city) VALUES (15, 'Sue Doe', 'Kochin');
+INSERT INTO emp (id, name, city) VALUES (16, 'Bill Doe', 'Kolkata');
+INSERT INTO emp (id, name, city) VALUES (17, 'Mary Doe', 'Pune');
+INSERT INTO emp (id, name, city) VALUES (18, 'Mike Doe', 'Bangalore');
+INSERT INTO emp (id, name, city) VALUES (19, 'Jane Johnson', 'Hyderabad');
+INSERT INTO emp (id, name, city) VALUES (20, 'John Johnson', 'Ahmedabad');
+INSERT INTO emp (id, name, city) VALUES (21, 'Bob Johnson', 'Mumbai');
+INSERT INTO emp (id, name, city) VALUES (22, 'Alice Johnson', 'Delhi');
+INSERT INTO emp (id, name, city) VALUES (23, 'Tom Johnson', 'Chennai');
+INSERT INTO emp (id, name, city) VALUES (24, 'Sue Johnson', 'Kochin');
+INSERT INTO emp (id, name, city) VALUES (25, 'Bill Johnson', 'Kolkata');
+INSERT INTO emp (id, name, city) VALUES (26, 'Mary Johnson', 'Pune');
+INSERT INTO emp (id, name, city) VALUES (27, 'Mike Johnson', 'Bangalore');
+INSERT INTO emp (id, name, city) VALUES (28, 'Jane Williams', 'Hyderabad');
+INSERT INTO emp (id, name, city) VALUES (29, 'John Williams', 'Ahmedabad');
+INSERT INTO emp (id, name, city) VALUES (30, 'Bob Williams', 'Mumbai');
+INSERT INTO emp (id, name, city) VALUES (31, 'Bob Williams', 'Mumbai');
+INSERT INTO emp (id, name, city) VALUES (32, 'Bob Williams', 'Mumbai');
+INSERT INTO emp (id, name, city) VALUES (33, 'Bob Williams', '');
+INSERT INTO emp (id, name) VALUES (34, 'Bob Williams');
+
+SELECT * FROM emp WHERE city LIKE '%abad';
+
+18) Search records where the city contains the string ‘under’.
+SELECT * FROM emp WHERE city LIKE '%under%';
+
+19) Search records where the third last character of the city is ‘b’.
+SELECT * FROM emp WHERE SUBSTRING(city FROM LENGTH(city) - 2 FOR 1) = 'b';
+
+20) Search the records where first character of the city is ‘A’.
+SELECT * FROM emp WHERE SUBSTRING(city FOR 1) = 'A';
+
+22) Search first 10 records.
+SELECT * FROM emp LIMIT 10;
+
+23) Search first 5 records where city is Mumbai
+SELECT * FROM emp WHERE city = 'Mumbai' or city = 'Bangalore' LIMIT 5;
+
+24) Search first 5 records where city is Mumbai or Bangalore. Search the next 5 records skipping the first 5 records where city is Mumbai or Bangalore.
+SELECT * FROM emp WHERE city = 'Mumbai' or city = 'Bangalore' LIMIT 5;
+SELECT * FROM emp WHERE city = 'Mumbai' or city = 'Bangalore' LIMIT 5 OFFSET 5;
+
+25) Sort the records where city is Mumbai or Bangalore by City Name.
+SELECT * FROM emp WHERE city = 'Mumbai' or city = 'Bangalore' ORDER BY city ASC;
+
+26) Sort all the records of the table by ID in descending order.
+SELECT * FROM emp ORDER BY id DESC;
+
+27) Insert few records where the city is not entered. Search all the records where the blank.
+SELECT * FROM emp WHERE city IS NULL OR city = '';
+
+28) Add a date field in the existing table. Search the records where date is in current year.
+ALTER TABLE emp ADD COLUMN hire_date date;
+UPDATE emp SET hire_date = '2022-12-1' WHERE id = 1;
+UPDATE emp SET hire_date = '2022-12-1' WHERE id = 2;
+UPDATE emp SET hire_date = '2022-12-1' WHERE id = 3;
+UPDATE emp SET hire_date = '2020-12-1' WHERE id = 4;
+UPDATE emp SET hire_date = '2021-12-1' WHERE id = 5;
+SELECT * FROM emp WHERE hire_date >= date_trunc('year', current_date) AND hire_date < date_trunc('year', current_date + interval '1 year');
+
+29) Enter few duplicate records where name is duplicate. Select unique records from a table.
+SELECT DISTINCT name FROM emp;
+
+30) Enter a column amount in the table. Get a total of the complete amount.
+ALTER TABLE emp ADD COLUMN amount integer(6);
+UPDATE emp SET amount = 2000 WHERE id = 1;
+UPDATE emp SET amount = 98000 WHERE id = 2;
+UPDATE emp SET amount = 8000 WHERE id = 3;
+UPDATE emp SET amount = 32000 WHERE id = 4;
+UPDATE emp SET amount = 40000 WHERE id = 5;
+SELECT SUM(amount) FROM emp;
+
+31) Get total of amount by city.
+SELECT city,SUM(amount) FROM emp GROUP BY city;
+
+32) Get avg of amount by city.
+SELECT city,AVG(amount) FROM emp GROUP BY city;
+
+33) Get maximum amount from all records
+SELECT MAX(amount) FROM emp;
+
+34) Get minimum amount from all records.
+SELECT MIN(amount) FROM emp;
+
+35) Fetch the quarter of the date field for all the records.
+SELECT id, name, hire_date, EXTRACT(QUARTER FROM hire_date) AS quarter FROM emp;
+
+36) Fetch the year of the date field for all the records.
+SELECT id, name, hire_date, EXTRACT(YEAR FROM hire_date) AS year FROM emp;
+
+37) Fetch the weekday of the date field for all the records.
+SELECT id, name, hire_date, EXTRACT(DOW FROM hire_date) AS weekday FROM emp;
+
+38) For all the records fetch whether it’s a new admission or old admission. If the date is of current year it will be a new admission else it will be an old admission.
+SELECT id, name, hire_date,CASE WHEN EXTRACT(YEAR from hire_date) = EXTRACT(YEAR from CURRENT_DATE) THEN 'New Admission'ELSE 'Old Admission' END AS admission_type FROM emp;
+
+39) Display, id, name and new/old admission. NOTE: Admission field not to be added in the table.
+SELECT id, name,CASE WHEN EXTRACT(YEAR from hire_date) = EXTRACT(YEAR from CURRENT_DATE) THEN 'New Admission'ELSE 'Old Admission' END AS admission_type FROM emp;
+
+40) Add a primary key to the table as id.
+ALTER TABLE emp ADD PRIMARY KEY (id);
+ALTER TABLE emp DROP CONSTRAINT emp_pkey
+
+41) Create two tables one will be employee and another will be city. Add a primary key id in both the tables. Add a foreign key of city in the employee table as city_id.
+CREATE TABLE empl (
+  id INTEGER PRIMARY KEY,
+  city_id INTEGER REFERENCES city (id)
+);
+CREATE TABLE city (
+  id INTEGER PRIMARY KEY
+);
+
+42) Add a not null constraint for name field in employee.
+ALTER TABLE employee ALTER COLUMN name SET NOT NULL;
+
+43) Add a new field in Code in the city table. Add a unique constraint on the code field.
+ALTER TABLE city ADD COLUMN code VARCHAR(6) UNIQUE;
+
+44) Add another table called Company and a primary key as id. Now add a foreign key of company in city table. Add a unique constraint with combination of company and code fields. Remove the old unique constraint with only code field.
+CREATE TABLE company (
+  id INTEGER PRIMARY KEY
+);
+ALTER TABLE city ADD company_id INTEGER REFERENCES company (id);
+ALTER TABLE city DROP CONSTRAINT city_code_key;
+ALTER TABLE city ADD CONSTRAINT company_code_unique UNIQUE (company_id, code);
+
+45) Check that the date is not before 2010-01-01 in the employee table using check constraint.
+ALTER TABLE employee ADD CONSTRAINT date_check CHECK (hire_date >= '2010-01-01');
+
+
+

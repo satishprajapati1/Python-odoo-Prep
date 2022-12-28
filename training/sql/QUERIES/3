@@ -1,0 +1,9 @@
+11) Create a view using the above select query result. 
+
+12) Delete the view and create a new view adding fields as id, name, amount, date, city name , city code and company name. 
+
+13) Insert 15 records using an sql file. In the same file update 5 records of the city Mumbai increase the amount with 10. 
+
+14) Create a backup of the database and restore it using PSQL. 
+
+15) Create a backup of the database and restore using pg_restore

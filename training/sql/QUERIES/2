@@ -1,0 +1,81 @@
+1) Create an index on the name field in City Table. 
+ALTER TABLE city ADD COLUMN name varchar(15);
+CREATE INDEX city_name_index ON city (name);
+
+2) Create an index on the date and city fields in Employee Table 
+CREATE INDEX idx_employee_date_city ON employee (hire_date, city);
+
+3) Create an index on the name field in Employee table. 
+CREATE INDEX employee_name_index ON employee (name);
+
+4) Create an index on the name field in Company table. Remove the index. 
+CREATE INDEX company_name_index ON company (name);
+DROP INDEX company_name_index;
+
+5) Create a primary key in a new table where there is an auto generated number starting from 1 without create a sequence. 
+CREATE TABLE e (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  city VARCHAR(255)
+);
+INSERT INTO e (name, city) VALUES ('Binal Mori', 'Hyderabad');
+6) Create a sequence starting from 1000. Create a primary key in a new table. When inserting records use this sequence. 
+CREATE SEQUENCE ex_id_seq START WITH 1000;
+
+CREATE TABLE ex (
+  id INTEGER PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+INSERT INTO ex (id,name) VALUES (nextval('ex_id_seq'),'Binal Mori');
+
+7) Create a sequence starting from 500. Create a primary key in a new table and assign default value from this sequence. 
+CREATE SEQUENCE exa_id_seq START WITH 500;
+
+CREATE TABLE exa (
+  id INTEGER DEFAULT nextval('exa_id_seq') PRIMARY KEY,
+  name VARCHAR(255) NOT NULL
+);
+INSERT INTO exa (name) VALUES ('Binal Mori');
+
+8) Delete the sequence which was created with 1000. Try to use the sequence to insert records. 
+DROP SEQUENCE ex_id_seq;
+INSERT INTO ex (id,name) VALUES (nextval('ex_id_seq'),'Riddhi');
+
+9) Display the fields id, name, city name from employee and city tables using inner join and aliases. 
+SELECT e.id, e.name, c.name AS city FROM empl e INNER JOIN city c ON e.city_id = c.id;
+SELECT e.id, e.name, c.name AS city FROM empl e LEFT JOIN city c ON e.city_id = c.id;
+SELECT e.id, e.name, c.name AS city FROM empl e RIGHT JOIN city c ON e.city_id = c.id;
+SELECT e.id, e.name, c.name AS city FROM empl e FULL JOIN city c ON e.city_id = c.id;
+SELECT e.id, e.name, c.name AS city FROM empl e INNER JOIN city c ON e.city_id = c.id;
+
+10) Display id, name, city name and company name from employee, city and company tables.
+SELECT e.id, e.name, c.name,cm.name AS city FROM empl e,city c,company cm WHERE e.city_id = c.id and c.company_id = cm.id;
+
+14) Fetch id, name, cost price, sale price, category code, category name for all the products. 
+CREATE TABLE product (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  cost_price NUMERIC(10,2),
+  sale_price NUMERIC(10,2),
+  category_code VARCHAR(255),
+  category_name VARCHAR(255)
+);
+INSERT INTO product (name, cost_price, sale_price, category_code, category_name)
+VALUES ('iPhone 12', 800.00, 899.99, '101', 'Cellphones'),
+       ('Laptop', 1299.99, 1399.99, '102', 'Laptops'),
+       ('DSLR', 799.99, 849.99, '103', 'Cameras'),
+       ('Wireless Headphones', 350.00, 399.99, '104', 'Headphones'),
+       ('TV', 999.99, 1099.99, '105', 'Televisions');
+select * from product;
+
+15) Close a cursor 
+BEGIN;
+DECLARE emp_cursor CURSOR FOR SELECT * FROM employee;
+END;
+OPEN emp_cursor;
+CLOSE emp_cursor;
+
+16) Close a connection
+DISCONNECT;
+
+
